@@ -1,28 +1,48 @@
 :root {
-  /* Color palette */
-  --ds-color-brand-50: #eff6ff;
-  --ds-color-brand-100: #dbeafe;
-  --ds-color-brand-500: #3b82f6;
-  --ds-color-brand-600: #2563eb;
-  --ds-color-brand-700: #1d4ed8;
+  /* Color palette — dark, cyan accent (Brutalism + Futurism) */
+  --ds-color-brand-50: #ecfeff;
+  --ds-color-brand-100: #cffafe;
+  --ds-color-brand-300: #67e8f9;
+  --ds-color-brand-400: #22d3ee;
+  --ds-color-brand-500: #06b6d4;
+  --ds-color-brand-600: #0891b2;
+  --ds-color-brand-700: #0e7490;
+  --ds-color-brand-ink: #001318;
   --ds-color-neutral-0: #ffffff;
-  --ds-color-neutral-50: #f8fafc;
-  --ds-color-neutral-100: #f1f5f9;
-  --ds-color-neutral-200: #e2e8f0;
-  --ds-color-neutral-300: #cbd5e1;
-  --ds-color-neutral-500: #64748b;
-  --ds-color-neutral-700: #334155;
-  --ds-color-neutral-900: #0f172a;
-  --ds-color-success: #16a34a;
-  --ds-color-warning: #d97706;
-  --ds-color-danger: #dc2626;
+  --ds-color-neutral-50: #f3f6f9;
+  --ds-color-neutral-100: #e6edf3;
+  --ds-color-neutral-200: #c8d3dd;
+  --ds-color-neutral-300: #a9b6c3;
+  --ds-color-neutral-500: #6b7b8c;
+  --ds-color-neutral-700: #243140;
+  --ds-color-neutral-800: #17202a;
+  --ds-color-neutral-850: #10161d;
+  --ds-color-neutral-900: #0a0e13;
+  --ds-color-neutral-950: #05070a;
+  --ds-color-success: #34d399;
+  --ds-color-warning: #fbbf24;
+  --ds-color-danger: #f43f5e;
 
   /* Semantic colors */
-  --ds-color-background: var(--ds-color-neutral-0);
-  --ds-color-foreground: var(--ds-color-neutral-900);
-  --ds-color-muted: var(--ds-color-neutral-500);
-  --ds-color-border: var(--ds-color-neutral-200);
-  --ds-color-surface: var(--ds-color-neutral-50);
+  --ds-color-background: var(--ds-color-neutral-950);
+  --ds-color-foreground: var(--ds-color-neutral-100);
+  --ds-color-muted: var(--ds-color-neutral-300);
+  --ds-color-border: var(--ds-color-neutral-700);
+  --ds-color-border-strong: var(--ds-color-neutral-100);
+  --ds-color-surface: var(--ds-color-neutral-900);
+  --ds-color-surface-raised: var(--ds-color-neutral-850);
+  --ds-color-accent: var(--ds-color-brand-400);
+  --ds-color-accent-hover: var(--ds-color-brand-300);
+  --ds-color-accent-ink: var(--ds-color-brand-ink);
+  --ds-color-focus: var(--ds-color-brand-300);
+
+  /* Glow channels (use as rgb(var(--ds-glow-cyan) / alpha)) */
+  --ds-glow-cold: 200 225 255;
+  --ds-glow-cyan: 34 211 238;
+
+  /* Typography */
+  --ds-font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Cascadia Mono', Consolas,
+    'SF Mono', Menlo, monospace;
 
   /* Spacing scale: 4px base unit */
   --ds-space-0: 0;
@@ -39,25 +59,40 @@
   --ds-space-20: 5rem;
   --ds-space-24: 6rem;
 
-  /* Borders and radii */
+  /* Borders and radii — brutalist: square corners; full kept for explicit dots/pills */
   --ds-border-width-thin: 1px;
   --ds-border-width-thick: 2px;
+  --ds-border-width-heavy: 3px;
   --ds-radius-none: 0;
-  --ds-radius-sm: 0.375rem;
-  --ds-radius-md: 0.5rem;
-  --ds-radius-lg: 0.75rem;
-  --ds-radius-xl: 1rem;
+  --ds-radius-sm: 0;
+  --ds-radius-md: 0;
+  --ds-radius-lg: 0;
+  --ds-radius-xl: 0;
   --ds-radius-full: 9999px;
+
+  /* Hard shadows */
+  --ds-shadow-brutal-sm: 4px 4px 0 0 var(--ds-color-foreground);
+  --ds-shadow-brutal: 8px 8px 0 0 var(--ds-color-accent);
+
+  /* Motion */
+  --ds-ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ds-duration-fast: 150ms;
+  --ds-duration-base: 300ms;
+  --ds-duration-slow: 600ms;
 }
 
 @theme {
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--ds-font-mono);
 
   --color-brand-50: var(--ds-color-brand-50);
   --color-brand-100: var(--ds-color-brand-100);
+  --color-brand-300: var(--ds-color-brand-300);
+  --color-brand-400: var(--ds-color-brand-400);
   --color-brand-500: var(--ds-color-brand-500);
   --color-brand-600: var(--ds-color-brand-600);
   --color-brand-700: var(--ds-color-brand-700);
+  --color-brand-ink: var(--ds-color-brand-ink);
   --color-neutral-0: var(--ds-color-neutral-0);
   --color-neutral-50: var(--ds-color-neutral-50);
   --color-neutral-100: var(--ds-color-neutral-100);
@@ -65,7 +100,10 @@
   --color-neutral-300: var(--ds-color-neutral-300);
   --color-neutral-500: var(--ds-color-neutral-500);
   --color-neutral-700: var(--ds-color-neutral-700);
+  --color-neutral-800: var(--ds-color-neutral-800);
+  --color-neutral-850: var(--ds-color-neutral-850);
   --color-neutral-900: var(--ds-color-neutral-900);
+  --color-neutral-950: var(--ds-color-neutral-950);
   --color-success: var(--ds-color-success);
   --color-warning: var(--ds-color-warning);
   --color-danger: var(--ds-color-danger);
@@ -73,7 +111,13 @@
   --color-foreground: var(--ds-color-foreground);
   --color-muted: var(--ds-color-muted);
   --color-border: var(--ds-color-border);
+  --color-border-strong: var(--ds-color-border-strong);
   --color-surface: var(--ds-color-surface);
+  --color-surface-raised: var(--ds-color-surface-raised);
+  --color-accent: var(--ds-color-accent);
+  --color-accent-hover: var(--ds-color-accent-hover);
+  --color-accent-ink: var(--ds-color-accent-ink);
+  --color-focus: var(--ds-color-focus);
 
   --spacing-0: var(--ds-space-0);
   --spacing-1: var(--ds-space-1);
@@ -95,4 +139,11 @@
   --radius-lg: var(--ds-radius-lg);
   --radius-xl: var(--ds-radius-xl);
   --radius-full: var(--ds-radius-full);
+
+  --shadow-brutal-sm: var(--ds-shadow-brutal-sm);
+  --shadow-brutal: var(--ds-shadow-brutal);
+
+  --ease-out: var(--ds-ease-out);
+  --default-transition-duration: var(--ds-duration-fast);
+  --default-transition-timing-function: var(--ds-ease-out);
 }

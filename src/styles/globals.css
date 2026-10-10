@@ -3,7 +3,8 @@
 
 @layer base {
   :root {
-    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    color-scheme: dark;
+    font-family: var(--ds-font-mono);
     color: var(--ds-color-foreground);
     background: var(--ds-color-background);
     font-synthesis: none;
@@ -32,7 +33,12 @@
   }
 
   ::selection {
-    background: var(--ds-color-brand-100);
-    color: var(--ds-color-brand-700);
+    background: var(--ds-color-accent);
+    color: var(--ds-color-accent-ink);
+  }
+
+  :focus-visible {
+    outline: var(--ds-border-width-thick) solid var(--ds-color-focus);
+    outline-offset: 3px;
   }
 }
