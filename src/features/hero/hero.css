@@ -1,0 +1,155 @@
+/* Efeitos do hero. Layout e tipografia ficam no Tailwind dos componentes. */
+
+/* Registrada para o CSS conseguir interpolar o progresso no scroll timeline. */
+@property --p {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+/* ---------- seção + progresso do scroll ---------- */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .hero {
+      animation: hero-progress linear both;
+      animation-timeline: view();
+      animation-range: exit-crossing 0% exit-crossing 100%;
+    }
+  }
+
+  .hero-layer {
+    will-change: transform;
+    transform: translate3d(0, calc(var(--p) * var(--d) * var(--hero-intensity, 1) * 1px), 0);
+  }
+
+  .hero-caret {
+    animation: hero-blink 1s steps(1) infinite;
+  }
+}
+
+@keyframes hero-progress {
+  from { --p: 0; }
+  to { --p: 1; }
+}
+
+@keyframes hero-blink {
+  50% { opacity: 0; }
+}
+
+/* ---------- camadas decorativas ---------- */
+.hero-layer {
+  position: absolute;
+  inset: -10% 0;
+  pointer-events: none;
+}
+
+/* Profundidades da variação A: fundo lento, meio mais rápido, frente no sentido oposto. */
+.hero-layer--bg { --d: 60; z-index: -3; }
+.hero-layer--mid { --d: 120; z-index: -2; }
+.hero-layer--front { --d: -60; z-index: -1; }
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--ds-color-neutral-700) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ds-color-neutral-700) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.55;
+}
+
+.hero-ghost {
+  position: absolute;
+  right: -2vw;
+  bottom: 12%;
+  font-size: clamp(5rem, 20vw, 17rem);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  text-align: right;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--ds-color-neutral-700);
+}
+
+.hero-tag {
+  position: absolute;
+  padding: 2px 8px;
+  border: var(--ds-border-width-thick) solid var(--ds-color-border);
+  background: var(--ds-color-background);
+  color: var(--ds-color-muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* ---------- card com luz e borda reativa ---------- */
+.glow-card {
+  --mx: 50%;
+  --my: 25%;
+  --lo: 0;
+  position: relative;
+  isolation: isolate;
+  background: var(--ds-color-surface);
+  border: var(--ds-border-width-heavy) solid var(--ds-color-border-strong);
+  box-shadow: var(--ds-shadow-brutal);
+}
+
+.glow-card[data-lit],
+.glow-card:focus-within {
+  --lo: 1;
+}
+
+.glow-card__light,
+.glow-card__border {
+  position: absolute;
+  pointer-events: none;
+  opacity: var(--lo);
+  transition: opacity var(--ds-duration-base) var(--ds-ease-out);
+}
+
+.glow-card__light {
+  inset: 0;
+  background: radial-gradient(
+    360px circle at var(--mx) var(--my),
+    rgb(var(--ds-glow-cyan) / 0.14),
+    transparent 65%
+  );
+}
+
+/* Gradiente no ponto do cursor, mascarado para aparecer só no anel da borda. */
+.glow-card__border {
+  inset: calc(var(--ds-border-width-heavy) * -1);
+  padding: var(--ds-border-width-heavy);
+  background: radial-gradient(240px circle at var(--mx) var(--my), var(--ds-color-accent), transparent 70%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+}
+
+.glow-card__content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Reduzir movimento: luz parada e visível, sem transição. */
+@media (prefers-reduced-motion: reduce) {
+  .glow-card {
+    --mx: 50%;
+    --my: 20%;
+  }
+
+  .glow-card__light,
+  .glow-card__border {
+    opacity: 0.6;
+    transition: none;
+  }
+}
